@@ -56,7 +56,7 @@ endif()
 
 # Generate CMake config file for usage without "make install"
 # ---------------------------------------------------------------
-SET(THE_INCLUDE_DIRECTORIES "${SRBA_ALL_SOURCE_DIR}/include")
+SET(THE_INCLUDE_DIRECTORIES "${CMAKE_INSTALL_PREFIX}/include")
 CONFIGURE_FILE(
 	"${SRBA_ALL_SOURCE_DIR}/srba-config.cmake.in"
     "${SRBA_ALL_BINARY_DIR}/srba-config.cmake" @ONLY IMMEDIATE )
@@ -99,5 +99,10 @@ if (BUILD_EXAMPLES)
 endif()
 # tests
 add_subdirectory(tests)
+
+install(FILES ${srba_all_srcs} DESTINATION include/srba)
+install(FILES
+  "${PROJECT_BINARY_DIR}/srba-config.cmake"
+  DESTINATION lib/srba)
 
 
